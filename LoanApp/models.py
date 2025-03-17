@@ -15,7 +15,7 @@ class User(models.Model):
         (ADMIN,'Admin'),
         (USER,'User')
     ]
-    id= models.UUIDField(default=uuid.uuid4,primary_key=True,editable=False)
+    
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
@@ -35,7 +35,6 @@ class User(models.Model):
     
     
 class OTPVerification(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="otps")
     otp_code = models.CharField(max_length=6)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -54,4 +53,24 @@ class OTPVerification(models.Model):
 
     def __str__(self):
         return f"OTP for {self.user.email}: {self.otp_code}"   
+    
+
+class Loan(models.Model):
+    loan_id =models.CharField(max_length=20,unique=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="loans")
+    amount = models.DecimalField(max_digits=10,decimal_places=2)
+    tenure = models.IntegerField(help_text="Loan tenure in  months")
+    interest_rate= models.DecimalField(max_digits=5,decimal_places=2)
+    start_date = models.DateField(auto_now_add=True)
+    end_date =models.DateField()
+    is_active= models.BooleanField(default=True)
+    foreclosed = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.loan_id
+    
+    
+    
+    
+    
     

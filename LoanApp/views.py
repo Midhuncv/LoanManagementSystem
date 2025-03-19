@@ -151,6 +151,6 @@ class LoanCreateView(APIView):
         except ValueError:
             return Response({"message": "Invalid input data"}, status=status.HTTP_400_BAD_REQUEST)
 
-class Render(APIView):
+class NewRender(APIView):
     pass
         

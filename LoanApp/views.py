@@ -3,10 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail  import send_mail
 from django.conf import settings
-from .models import User,OTPVerification
 from django.utils.timezone import now
 from datetime import timedelta
-import datetime
+from datetime import datetime
 from rest_framework.permissions import AllowAny
 from django.contrib.auth.hashers import make_password
 from .serializers import *
@@ -16,7 +15,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class RegsiterUserView(APIView):
-  
+
     permission_classes = [AllowAny]
     def post(self,request):
         serializer = RegisterUserSerializer(data=request.data)

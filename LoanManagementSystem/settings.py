@@ -52,6 +52,8 @@ REST_FRAMEWORK = {
         
     ),
 }
+# settings.py
+AUTH_USER_MODEL = 'LoanApp.User'
 
 from datetime import timedelta
 
@@ -63,7 +65,10 @@ SIMPLE_JWT = {
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',  # Use 'id' instead of 'username'
+    'USER_ID_CLAIM': 'user_id',
 }
+
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
